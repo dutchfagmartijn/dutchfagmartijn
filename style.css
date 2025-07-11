@@ -59,3 +59,15 @@ h1 {
 .button:hover {
   background-color: #555;
 }
+.single-photo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.single-photo img {
+  width: 60%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
