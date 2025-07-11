@@ -149,3 +149,18 @@ h1 {
 .contact-right a:hover {
   color: #555;
 }
+.button {
+  display: inline-block;
+  padding: 10px 24px;
+  background-color: #333 !important;
+  color: white !important;              /* Zet kleur wit met !important */
+  text-decoration: none !important;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #555 !important;
+  color: white !important;
+}
