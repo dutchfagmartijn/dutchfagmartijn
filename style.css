@@ -86,6 +86,50 @@ h1 {
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
+
+/* Contact pagina layout */
+.contact-row {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  align-items: flex-start;
+}
+
+.contact-left {
+  flex: 1 1 350px;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.contact-photo {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 0;
+}
+
+.map-container iframe {
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.contact-right {
+  flex: 1 1 300px;
+  max-width: 500px;
+  font-size: 18px;
+  color: #222;
+}
+
+.contact-right h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+/* Contact opties lijst stijl */
 .contact-right ul {
   list-style-type: none;
   padding: 0;
