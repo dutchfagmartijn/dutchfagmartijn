@@ -5,27 +5,123 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>My Videos — Martijn van Tienhoven</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Thumbnails container */
+    .media-row {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    /* Video thumbnails styling */
+    .video-thumb {
+      width: 28%;
+      cursor: pointer;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      object-fit: cover;
+      height: 150px;
+      background-color: #000;
+      position: relative;
+    }
+
+    /* Play icon overlay on thumbnail */
+    .video-thumb::after {
+      content: "▶";
+      font-size: 40px;
+      color: rgba(255,255,255,0.8);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* Lightbox overlay */
+    #lightbox {
+      display: none;
+      position: fixed;
+      top:0; left:0; right:0; bottom:0;
+      background: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    #lightbox video {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 8px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.8);
+    }
+
+    /* Close button */
+    #lightbox .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 30px;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      user-select: none;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
     <h1>My Videos</h1>
 
     <div class="media-row">
-      <!-- Voeg hier je video's toe -->
-      <video controls class="media-item">
-        <source src="video1.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-
-      <video controls class="media-item">
-        <source src="video2.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-
-      <!-- Voeg meer video's toe zoals gewenst -->
+      <!-- Video thumbnails, klikbaar -->
+      <video class="video-thumb" data-src="video1.mp4" muted preload="metadata"></video>
+      <video class="video-thumb" data-src="video2.mp4" muted preload="metadata"></video>
+      <video class="video-thumb" data-src="video3.mp4" muted preload="metadata"></video>
     </div>
 
     <a href="index.html" class="button">Back to homepage</a>
   </div>
+
+  <!-- Lightbox overlay -->
+  <div id="lightbox">
+    <div class="close-btn">&times;</div>
+    <video controls autoplay></video>
+  </div>
+
+  <script>
+    const lightbox = document.getElementById('lightbox');
+    const lightboxVideo = lightbox.querySelector('video');
+    const closeBtn = lightbox.querySelector('.close-btn');
+    const thumbnails = document.querySelectorAll('.video-thumb');
+
+    // Zet thumbnails met preview
+    thumbnails.forEach(thumb => {
+      const src = thumb.getAttribute('data-src');
+      // Laad metadata om preview te tonen
+      thumb.src = src;
+      thumb.addEventListener('click', () => {
+        lightboxVideo.src = src;
+        lightbox.style.display = 'flex';
+        lightboxVideo.play();
+      });
+    });
+
+    // Sluit lightbox
+    closeBtn.addEventListener('click', () => {
+      lightboxVideo.pause();
+      lightboxVideo.src = '';
+      lightbox.style.display = 'none';
+    });
+
+    // Sluit lightbox bij klikken buiten video
+    lightbox.addEventListener('click', (e) => {
+      if(e.target === lightbox) {
+        closeBtn.click();
+      }
+    });
+  </script>
 </body>
 </html>
